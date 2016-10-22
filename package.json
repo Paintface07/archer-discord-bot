@@ -1,0 +1,29 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "description": "My first bot for discord",
+  "main": "discord-bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Paintface07/discord-bot.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "chat",
+    "chatbot"
+  ],
+  "author": "Kevin Kondratuk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Paintface07/discord-bot/issues"
+  },
+  "homepage": "https://github.com/Paintface07/discord-bot#readme",
+  "dependencies": {
+    "discord.js": "^9.3.1",
+    "jasmine-node": "^1.14.5"
+  }
+}
