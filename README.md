@@ -1,1 +1,1 @@
-# discord-bot
+# archer-discord-bot
