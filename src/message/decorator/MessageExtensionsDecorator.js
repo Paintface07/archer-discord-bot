@@ -4,7 +4,7 @@ const fs = require('fs');
 
 class MessageExtensionsDecorator {
     constructor(CONFIG) {
-        this.CONFIG = JSON.parse(fs.readFileSync('archerisms.static.json', 'utf8'));;
+        this.CONFIG = CONFIG;
     }
     
     decorate(msg) {
@@ -16,9 +16,15 @@ class MessageExtensionsDecorator {
         for (var m in this.CONFIG.triggers) {
             const phrase = this.CONFIG.phrases[m];
             if (msg.content.includes(phrase.trigger)) {
-                return "ARCHERISM";
+                return 'ARCHERISM';
+            } else if (msg.content.includes("!help")) {
+                return 'HELP';
+            } else if (msg.channel.type === 'dm') {
+                return 'DM'
             }
         }
+
+        return;
     }
 }
 

@@ -1,10 +1,8 @@
 'use strict';
 
-const fs = require('fs');
-
 class ArcherismMessageProcessor {
     constructor(CONFIG) {
-        this.CONFIG = JSON.parse(fs.readFileSync('archerisms.static.json', 'utf8'));;
+        this.CONFIG = CONFIG;
     }
     
     process(msg) {
@@ -17,7 +15,8 @@ class ArcherismMessageProcessor {
         }
 
         console.log(msg.messageType);
-        return matchingPhrases[Math.floor(Math.random() * matchingPhrases.length)];
+        return matchingPhrases.length > 0 ? matchingPhrases[Math.floor(Math.random() * matchingPhrases.length)]
+            : console.error('ArcherismMessageProcessor.process() invoked, but trigger not configured.');
     }
 }
 

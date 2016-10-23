@@ -1,4 +1,5 @@
 {
+  "serverKey": "<KEY GOES HERE>",
   "triggers": [
     "!archerism"
   ], "phrases": [
