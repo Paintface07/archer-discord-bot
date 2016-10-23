@@ -8,16 +8,26 @@ var archerisms = JSON.parse(fs.readFileSync('archerisms.static.json', 'utf8'));
 
 bot.on("message", msg => {
     console.log(msg);
+    
+    // make sure the message wasn't from a bot
+    if(msg.author.bot != true) {
+        const date = new Date();
+        const filename = '' + date.getYear() + '-' + date.getMonth() + '-' + date.getDate() + '-' + date.getHours() + '-' + date.getMinutes() + '-' + date.getSeconds() + '-' + date.getMilliseconds();
+        fs.writeFile('log/' + filename + '.json', JSON.stringify(msg, null, 4), (err) => {
+            if (err) throw err;
+        });
 
-    var matchingPhrases = [];
-    for(var m in archerisms.phrases) {
-        const phrase = archerisms.phrases[m];
-        if(msg.content.startsWith(phrase.trigger)) {
-            matchingPhrases.push(phrase.text);
+        var matchingPhrases = [];
+        for (var m in archerisms.phrases) {
+            const phrase = archerisms.phrases[m];
+            if (msg.content.includes(phrase.trigger)) {
+                matchingPhrases.push(phrase.text);
+            }
         }
-    }
 
-    msg.channel.sendMessage(matchingPhrases[Math.floor(Math.random() * matchingPhrases.length)]);
+        msg.channel.sendMessage(matchingPhrases[Math.floor(Math.random() * matchingPhrases.length)]);
+        console.log(date);
+    }
     return;
 });
 
