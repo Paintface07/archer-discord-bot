@@ -2,14 +2,15 @@
 
 const Discord = require("discord.js");
 const fs = require('fs');
-const BotMessageExtensions = require('./src/util/MessageExtensionsDecorator');
+const BotMessageExtensions = require('./src/message/decorator/MessageExtensionsDecorator');
+const ArcherismMessageProcessor = require('./src/message/processor/ArcherismMessageProcessor');
 
 const bot = new Discord.Client();
 
 const CONFIG = JSON.parse(fs.readFileSync('archerisms.static.json', 'utf8'));
 
 bot.on("message", msg => {
-    console.log(msg);
+    // console.log(msg);
     
     const message = new BotMessageExtensions().decorate(msg);
     
@@ -21,18 +22,14 @@ bot.on("message", msg => {
             if (err) throw err;
         });
 
-        var matchingPhrases = [];
-        for (var m in CONFIG.phrases) {
-            const phrase = CONFIG.phrases[m];
-            if (message.content.includes(phrase.trigger)) {
-                matchingPhrases.push(phrase.text);
-            }
+        switch(message.messageType) {
+            case "ARCHERISM":
+                message.channel.sendMessage(new ArcherismMessageProcessor(CONFIG).process(message));
+            default:
+                // do nothing
         }
-
-        console.log(message.messageType());
-        message.channel.sendMessage(matchingPhrases[Math.floor(Math.random() * matchingPhrases.length)]);
     }
-    return;
+    return true;
 });
 
 bot.on('ready', () => {
