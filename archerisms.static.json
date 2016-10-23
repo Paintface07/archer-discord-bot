@@ -1,5 +1,7 @@
 {
-  "phrases": [
+  "triggers": [
+    "!archerism"
+  ], "phrases": [
     { "trigger": "!archerism", "text": "Do you want ants!?!  Because THAT is how you get ants." },
     { "trigger": "!archerism", "text": "DANGER ZONE!" },
     { "trigger": "!archerism", "text": "Danger zone." },

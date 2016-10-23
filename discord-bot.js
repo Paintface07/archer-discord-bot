@@ -1,32 +1,36 @@
 "use strict";
 
-var Discord = require("discord.js");
-var fs = require('fs');
-var bot = new Discord.Client();
+const Discord = require("discord.js");
+const fs = require('fs');
+const BotMessageExtensions = require('./src/util/MessageExtensionsDecorator');
 
-var archerisms = JSON.parse(fs.readFileSync('archerisms.static.json', 'utf8'));
+const bot = new Discord.Client();
+
+const CONFIG = JSON.parse(fs.readFileSync('archerisms.static.json', 'utf8'));
 
 bot.on("message", msg => {
     console.log(msg);
     
+    const message = new BotMessageExtensions().decorate(msg);
+    
     // make sure the message wasn't from a bot
-    if(msg.author.bot != true) {
+    if(message.author.bot != true) {
         const date = new Date();
         const filename = '' + date.getYear() + '-' + date.getMonth() + '-' + date.getDate() + '-' + date.getHours() + '-' + date.getMinutes() + '-' + date.getSeconds() + '-' + date.getMilliseconds();
-        fs.writeFile('log/' + filename + '.json', JSON.stringify(msg, null, 4), (err) => {
+        fs.writeFile('log/' + filename + '.json', JSON.stringify(message, null, 4), (err) => {
             if (err) throw err;
         });
 
         var matchingPhrases = [];
-        for (var m in archerisms.phrases) {
-            const phrase = archerisms.phrases[m];
-            if (msg.content.includes(phrase.trigger)) {
+        for (var m in CONFIG.phrases) {
+            const phrase = CONFIG.phrases[m];
+            if (message.content.includes(phrase.trigger)) {
                 matchingPhrases.push(phrase.text);
             }
         }
 
-        msg.channel.sendMessage(matchingPhrases[Math.floor(Math.random() * matchingPhrases.length)]);
-        console.log(date);
+        console.log(message.messageType());
+        message.channel.sendMessage(matchingPhrases[Math.floor(Math.random() * matchingPhrases.length)]);
     }
     return;
 });
