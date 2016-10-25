@@ -1,9 +1,11 @@
 'use strict';
+const googleapis = require('googleapis');
 const ArcherismMessageProcessor = require('./ArcherismMessageProcessor');
 
 class DmMessageProcessor {
     constructor(CONFIG) {
         this.CONFIG = CONFIG;
+        // googleapis.discover('youtube').execute(function(err, client) {});
     }
 
     process(msg) {

@@ -1,8 +1,10 @@
 {
-  "serverKey": "<KEY GOES HERE>",
+  "serverKey": "MjM5NDcxNDIwNDcwNTkxNDk4.Cu7pjA.Uh0V84rrsIH7LL6b-jk2VuqgUnI",
   "triggers": [
-    "!archerism"
+    "!archerism",
+    "!help"
   ], "phrases": [
+    { "trigger": "!help", "text": "-----------------------------------------------------------------------------\n-- Available commands:\n-----------------------------------------------------------------------------\n-- * !archerism - display a random archer quote\n-- * !help - display help information on the commands you can use\n-----------------------------------------------------------------------------" },
     { "trigger": "!archerism", "text": "Do you want ants!?!  Because THAT is how you get ants." },
     { "trigger": "!archerism", "text": "DANGER ZONE!" },
     { "trigger": "!archerism", "text": "Danger zone." },

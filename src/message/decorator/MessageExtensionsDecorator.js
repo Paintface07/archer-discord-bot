@@ -17,8 +17,6 @@ class MessageExtensionsDecorator {
             const phrase = this.CONFIG.phrases[m];
             if (msg.content.includes(phrase.trigger)) {
                 return 'ARCHERISM';
-            } else if (msg.content.includes("!help")) {
-                return 'HELP';
             } else if (msg.channel.type === 'dm') {
                 return 'DM'
             }

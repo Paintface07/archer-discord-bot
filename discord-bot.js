@@ -4,7 +4,6 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const BotMessageExtensionsDecorator = require('./src/message/decorator/MessageExtensionsDecorator');
 const ArcherismMessageProcessor = require('./src/message/processor/ArcherismMessageProcessor');
-const HelpMessageProcessor = require('./src/message/processor/HelpMessageProcessor');
 const DmMessageProcessor = require('./src/message/processor/DmMessageProcessor');
 
 const bot = new Discord.Client();
@@ -13,7 +12,6 @@ const CONFIG = JSON.parse(fs.readFileSync('archerisms.static.json', 'utf8'));
 
 const MESSAGE_PROCESSORS = [
     { messageType: 'ARCHERISM', processor: new ArcherismMessageProcessor(CONFIG) },
-    { messageType: 'HELP', processor: new HelpMessageProcessor(CONFIG) },
     { messageType: 'DM', processor: new DmMessageProcessor(CONFIG) }
 ];
 
