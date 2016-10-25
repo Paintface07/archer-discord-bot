@@ -5,7 +5,10 @@ const ArcherismMessageProcessor = require('./ArcherismMessageProcessor');
 class DmMessageProcessor {
     constructor(CONFIG) {
         this.CONFIG = CONFIG;
-        // googleapis.discover('youtube').execute(function(err, client) {});
+        googleapis.discoverAPI('https://www.googleapis.com/discovery/v1/apis/youtube/', function(err, result) {
+            if(err) throw err;
+            console.log(result.google.youtube);
+        });
     }
 
     process(msg) {
